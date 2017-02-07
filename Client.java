@@ -19,7 +19,7 @@ public class Client {
                 Socket tcpSocket = new Socket(this.serverAddress, this.nPort);
                 Scanner in = new Scanner(tcpSocket.getInputStream());
                 PrintWriter out = new PrintWriter(tcpSocket.getOutputStream())
-                ) {
+        ) {
             out.println(this.requestCode);
             out.flush();
             int rPort = in.nextInt();
@@ -28,7 +28,7 @@ public class Client {
             e.printStackTrace();
             System.exit(1);
         }
-        return -1;
+        return -1; // should never reach
     }
 
     private void sendMessage(int rPort) {
@@ -68,6 +68,7 @@ public class Client {
             String message = args[3];
             new Client(serverAddress, nPort, requestCode, message);
         } catch (Exception e) {
+            System.err.println("The input parameters do not meet the specification");
             e.printStackTrace();
             System.exit(1);
         }
